@@ -22,9 +22,11 @@ const crearGaleria = () => {
   const CANTIDAD_IMAGENES = 16;
 
   for (let i = 1; i <= CANTIDAD_IMAGENES; i++) {
-    const imagen = document.createElement("IMG");
-    imagen.src = `src/img/gallery/full/${i}.jpg`;
-    imagen.alt = "Imagen Galería";
+    const imagen = document.createElement("PICTURE");
+    imagen.innerHTML = `
+    <source srcset="build/img/gallery/thumb/${i}.avif" type="image/avif">
+    <source srcset="build/img/gallery/thumb/${i}.webp" type="image/webp">
+    <img loading="lazy" width="200" height="300" src="build/img/gallery/thumb/${i}.jpg" alt="imagen galeria">`;
 
     // Even handler
     imagen.onclick = () => {
@@ -36,9 +38,11 @@ const crearGaleria = () => {
 };
 
 const mostrarImagen = (i) => {
-  const imagen = document.createElement("IMG");
-  imagen.src = `src/img/gallery/full/${i}.jpg`;
-  imagen.alt = "Imagen Galería";
+  const imagen = document.createElement("PICTURE");
+  imagen.innerHTML = `
+  <source srcset="build/img/gallery/full/${i}.avif" type="image/avif">
+  <source srcset="build/img/gallery/full/${i}.webp" type="image/webp">
+  <img loading="lazy" width="200" height="300" src="build/img/gallery/full/${i}.jpg" alt="imagen galeria">`;
 
   // CREAR MODAL
 
@@ -99,18 +103,17 @@ const resaltarEnlace = () => {
   });
 };
 
-const scrollNav = () =>{
-  const navLinks = document.querySelectorAll('.nav-principal a');
+const scrollNav = () => {
+  const navLinks = document.querySelectorAll(".nav-principal a");
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', e =>{
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      const sectionScroll = e.target.getAttribute('href');
+      const sectionScroll = e.target.getAttribute("href");
       const section = document.querySelector(sectionScroll);
       console.log(section);
-      
-      section.scrollIntoView({behavior: 'smooth'});
-      
-    })
-  })
+
+      section.scrollIntoView({ behavior: "smooth" });
+    });
+  });
 };
